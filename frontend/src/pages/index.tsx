@@ -37,6 +37,7 @@ const Home: NextPage = ({ posts }: any) => {
       <TeamSection />
       <BlogSection posts={posts} />
       <FaqSection />
+      <p>1</p>
     </MainLayout>
   );
 };
