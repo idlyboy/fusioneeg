@@ -14,8 +14,8 @@ interface IMobileMenuProps {
 export const MobileMenu: FC<IMobileMenuProps> = ({ open, onMobileMenuClose }) => {
   return (
     <Dialog.Root open={open}>
-      {/* @ts-ignore */}
-      <Dialog.Portal className="relative">
+
+      <Dialog.Portal>
         <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0" />
         <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-0 left-0 right-0 z-30 h-full w-full bg-white p-2 focus:outline-none dark:bg-dark-gradient md:hidden">
           <Sidebar />
