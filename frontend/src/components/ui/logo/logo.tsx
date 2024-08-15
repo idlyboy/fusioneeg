@@ -28,17 +28,18 @@ interface LinkProps extends VariantProps<typeof logoStyles> {
 export const Logo: FC<LinkProps> = ({ withText, size, className, neuro }) => {
   return (
     <Link href={neuro ? "/playground" : "/"} className="inline-flex items-center">
-      <Image
+      {/* <Image
         src="/images/logo.png"
         alt="Neurofusion Logo"
         width={80}
         height={80}
         loading="eager"
         className={logoStyles({ size, className })}
-      />
+      /> */}
+      <Image src="/images/logo11.png" width={30} height={30} alt="neuro"/>
       {withText && (
         <h2 className="ml-2 font-heading text-2xl font-medium leading-10 text-primary-900 dark:text-white">
-          {neuro ? "NEUROFUSION" : "FUSION"}
+          {neuro ? "causality.network" : "causality.network"}
         </h2>
       )}
     </Link>

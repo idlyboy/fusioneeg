@@ -177,22 +177,22 @@ const PlaygroundPage: NextPage = () => {
 
 export default PlaygroundPage;
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getServerSession(req, res, authOptions);
+// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+//   const session = await getServerSession(req, res, authOptions);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/auth/login",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: { session },
-  };
-};
+//   return {
+//     props: { session },
+//   };
+// };
 
 interface CapabilitiesModalProps {
   onNext: () => void;

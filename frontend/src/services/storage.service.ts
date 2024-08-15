@@ -15,6 +15,8 @@ export function convertToCSV(arr: any[]) {
 }
 
 export async function writeDataToStore(dataName: string, data: any, fileTimestamp: string, storeType = "download") {
+  // console.log("downloadable data", data)
+  console.log("ggg")
   // TODO: fix validation
   console.log("fileTimestamp: ", fileTimestamp);
 
@@ -57,7 +59,9 @@ export async function downloadDataAsZip(datasetExport: DatasetExport, zipFileNam
   for (let i = 0; i < datasetExport.dataSets.length; i++) {
     const dataSet = datasetExport.dataSets[i];
     const content = convertToCSV(dataSet); // convert to csv format
+    console.log("content",content)
     zip.file(datasetExport.fileNames[i], content);
+    console.log("zip",zip.file)
   }
 
   // download the zip file

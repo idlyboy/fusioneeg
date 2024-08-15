@@ -17,6 +17,8 @@ import exp from "constants";
 import { MuseContext } from "~/hooks/muse.context";
 import { MuseEEGService, NeuroFusionParsedEEG } from "~/services/integrations/muse.service";
 import { SignalViewer } from "./signalviewer";
+// import { useStorageUpload } from "@thirdweb-dev/react";
+import axios from "axios";
 
 export const Experiment: FC<IExperiment> = (experiment) => {
   const [isNeurosityRecording, setIsNeurosityRecording] = useState(false);
@@ -29,12 +31,54 @@ export const Experiment: FC<IExperiment> = (experiment) => {
 
   const [sandboxData, setSandboxData] = useState("");
 
+
+
   const museContext = useContext(MuseContext);
 
   const [duration, setDuration] = useState(0);
   const [tags, setTags] = useState<string[]>([]);
 
   const [experimentInfo, setExperimentInfo] = useState<IExperiment>(experiment);
+
+  //New Stuff 
+  const [file, setFile] = useState<File | undefined>(undefined);
+  // const { mutateAsync: upload } = useStorageUpload();
+  const [value, setValue] = useState("");
+
+
+  // const uploadToIpfs = async () => {
+  //   const uploadUrl = await upload({
+  //     data: [file],
+  //     options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
+  //   });
+  //   return uploadUrl[0];
+  // };
+
+  // const handleSubmit = async (event:any) => {
+  //   event.preventDefault();
+  //   const url = "http://localhost:3000/api/three";
+  //   const formData = new FormData();
+  //   if (!file) {
+  //     console.error("No file selected");
+  //     return;
+  //   }
+  //   const imageUrl = await uploadToIpfs();
+  //   const imageCid = imageUrl.split("/")[imageUrl.split("/").length - 2];
+  //   formData.append("file", file);
+  //   formData.append("fileName", file.name);
+  //   const config = {
+  //     headers: {
+  //       "content-type": "multipart/form-data",
+  //     },
+  //   };
+  //   // add the image url to the form data
+  //   formData.append("imageCid", imageCid);
+  //   // formData.append("address", address as string);
+  //   axios.post(url, formData, config).then((response) => {
+  //     console.log(response.data);
+  //     setValue(JSON.stringify(response.data, null, 2));
+  //   });
+  // };
 
   useEffect(() => {
     setExperimentInfo({ ...experiment, duration, tags });
@@ -146,6 +190,7 @@ export const Experiment: FC<IExperiment> = (experiment) => {
   }
 
   const [museBrainwaves, setMuseBrainwaves] = useState<NeuroFusionParsedEEG[]>();
+
   const [isMuseRecording, setIsMuseRecording] = useState(false);
   useEffect(() => {
     // Subscribe to updates
@@ -173,7 +218,6 @@ export const Experiment: FC<IExperiment> = (experiment) => {
     if (!connectedDevice) return;
     const unsubscribe = neurosityService.onUpdate((data) => {
       // Handle the new data
-      console.log("neurosity data", data);
       const last1000Brainwaves = data.slice(-2500);
       setNeurosityBrainwaves(last1000Brainwaves);
     });
@@ -365,6 +409,7 @@ export const Experiment: FC<IExperiment> = (experiment) => {
                   <>
                     <Button
                       onClick={async () => {
+
                         stopMuseRecording();
                       }}
                     >
