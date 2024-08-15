@@ -1,10 +1,7 @@
-"use client"
-import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { FC, ReactNode } from "react";
 
 import { Footer, Navbar } from "~/components/ui";
 import { cn } from "~/utils";
-import ThirdwebWrapper from "../Thirdweb";
 
 interface MainLayoutProps {
   children?: ReactNode;
@@ -19,9 +16,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children, dark, isResearch }) 
       })}
     >
       <Navbar isResearch={isResearch} />
-      <ThirdwebWrapper >
-        <main className="min-h-[60vh] w-full">{children}</main>
-      </ThirdwebWrapper>
+      <main className="min-h-[60vh] w-full">{children}</main>
       <Footer isResearch={isResearch} />
     </div>
   );
